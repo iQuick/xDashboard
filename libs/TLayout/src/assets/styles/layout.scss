@@ -1,0 +1,25 @@
+@use 'anime';
+@use 'theme';
+
+body {
+  @apply overflow-hidden;
+}
+
+#app {
+  @apply h-screen w-screen select-none rounded-lg;
+
+  img {
+    -webkit-user-drag: none;
+  }
+
+  svg,
+  input,
+  select,
+  button {
+    @apply cursor-pointer;
+  }
+
+  section {
+    @apply w-full h-full;
+  }
+}

@@ -1,0 +1,18 @@
+# os
+.DS_Store
+
+# idea
+.idea
+*.lock
+
+# package
+node_modules
+pnpm-lock.yaml
+
+# build
+dist
+release
+
+# cache
+.eslintcache
+.stylelintcache

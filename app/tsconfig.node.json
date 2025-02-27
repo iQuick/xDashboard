@@ -1,0 +1,13 @@
+{
+  "extends": "@electron-toolkit/tsconfig/tsconfig.node.json",
+  "include": ["app"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "types": ["electron-vite/node"],
+    "paths": {
+      "~/*": ["*"],
+      "@/*": ["app/*"]
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "demo",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "lint-staged": {
+    "*.{js,ts,md,vue,yml,scss,json}": "prettier --write"
+  },
+  "dependencies": {
+    "vue": "^3.4.37"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.1.2",
+    "vite": "^5.4.1",
+    "sass": "^1.62.1",
+    "sass-loader": "^13.2.2",
+    "tlayout": "file:../../libs/TLayout"
+  }
+}

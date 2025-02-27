@@ -1,0 +1,29 @@
+{
+  "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
+  "productName": "xDashboard",
+  "appId": "com.xioobu.dashboard",
+  "afterSign": "public/scripts/notarize.js",
+  "icon": "public/images/icon.png",
+  "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+  "files": ["dist", "public"],
+  "directories": {
+    "output": "release"
+  },
+  "mac": {
+    "entitlementsInherit": "public/build/os/entitlements.mac.plist",
+    "target": { "target": "dmg", "arch": ["x64", "arm64"] }
+  },
+  "win": {
+    "target": [
+      { "target": "nsis", "arch": ["x64"] },
+      { "target": "msi", "arch": ["x64"] },
+      { "target": "7z", "arch": ["x64"] }
+    ]
+  },
+  "linux": {
+    "target": [
+      { "target": "AppImage", "arch": ["x64"] },
+      { "target": "deb", "arch": ["x64"] }
+    ]
+  }
+}
