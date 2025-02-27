@@ -28,13 +28,13 @@ export const useSettingStore = defineStore('app-setting', {
         showMain: false,
     }),
     getters: {
-        getTheme() {
+        getTheme() : string{
             return this.theme;
         },
-        getAutoStart() {
+        getAutoStart() : boolean{
             return this.autoStart;
         },
-        getShowMain() {
+        getShowMain() : boolean{
             return this.showMain;
         }
     },
