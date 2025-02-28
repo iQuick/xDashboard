@@ -101,28 +101,40 @@ const api_listener = (event: IpcMainEvent, data: any) => {
     const ev = data['event']
     const dt = data['data']
     switch (ev) {
-        case "func:main:maximize":
+        case "main:func:maximize":
             getWindow('main').maximize()
             break;
-        case "func:main:minimize":
+        case "main:func:minimize":
             getWindow('main').minimize()
             break;
-        case "func:main:close":
+        case "main:func:close":
             getWindow('main').close()
             break;
-        case "func:plugin:create":
+        case "main:func:plugin-create":
             break;
-        case "func:plugin:active":
+        case "main:func:plugin-active":
             createPluginWindow('demo', 'demo')
             break;
-        case "func:plugin:deactivate":
+        case "main:func:plugin-deactivate":
             break;
-        case "get:app-info":
-                event.returnValue = getAppInfo()
-                break
-        case "get:window-info":
+        case "main:get:app-info":
+            event.returnValue = getAppInfo()
+            break
+        case "main:get:plugin-info":
             event.returnValue = getWindowInfo(dt['id'])
             break
+        case "plugin:func:maximize":
+            getWindow("demo").maximize()
+            break;
+        case "plugin:func:minimize":
+            getWindow("demo").minimize()
+            break;
+        case "plugin:func:close":
+            getWindow("demo").close()
+            break;
+        case "plugin:get:plugin-info":
+            event.returnValue = getWindowInfo("demo")
+            break;
     }
 }
 

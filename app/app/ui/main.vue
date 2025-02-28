@@ -8,7 +8,7 @@ import {router} from "../configs/router";
 import {useSettingStoreWithOut} from "../configs/pinia";
 import {storeToRefs} from "pinia";
 
-const main = window.xds.getWindowInfo('main')
+const main = window.xds.getPluginInfo('main')
 const logo = '../assets/images/icon.png'
 const setting = storeToRefs(useSettingStoreWithOut());
 const active = reactive(['setting']);

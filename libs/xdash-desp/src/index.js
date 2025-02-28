@@ -36,13 +36,27 @@ export default function TLayoutPlugin(options = {}) {
   }
 }
 
+
+
 // 导入组件
 import TLayoutComponent from './components/TLayout.vue';
 
 const tlayout = {
   install(app){
-    app.component('TLayout', TLayoutComponent)
+    registerComponent(app)
+    registerProvide(app)
   }
+}
+
+const registerComponent = (app) => {
+  app.component('TLayout', TLayoutComponent)
+}
+
+const registerProvide = (app) => {
+  app.provide('info', window.plugin.getPluginInfo())
+  app.provide('maximize', window.plugin.maximize)
+  app.provide('minimize', window.plugin.minimize)
+  app.provide('close', window.plugin.close)
 }
 
 export {

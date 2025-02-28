@@ -28,6 +28,7 @@ export default defineConfig({
       rollupOptions: {
         input: {
           index: "app/preload.ts",
+          plugin: "app/plugins/preload.ts",
         },
       },
     },

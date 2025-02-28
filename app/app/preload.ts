@@ -23,34 +23,34 @@ window.xds = {
     __event__: {},
     hooks: {},
     mainMaximize: () => {
-        _send("func:main:maximize")
+        _send("main:func:maximize")
     },
     mainMinimize: () => {
-        _send("func:main:minimize")
+        _send("main:func:minimize")
     },
     mainClose: () => {
-        _send("func:main:close")
+        _send("main:func:close")
     },
     pluginCreate: (name: string) =>{
-        _send("func:plugin:create", {
+        _send("main:func:plugin-create", {
             'name': name
         })
     },
     pluginActive: (id: string) => {
-        _send("func:plugin:active", {
+        _send("main:func:plugin-active", {
             id
         })
     },
     pluginDeactivate: (id: string) => {
-        _send("func:plugin:deactivate", {
+        _send("main:func:plugin-deactivate", {
             id
         })
     },
     getAppInfo: () : any => {
-        return _sendSync("get:app-info")
+        return _sendSync("main:get:app-info")
     },
-    getWindowInfo: (id: string) : any => {
-        return _sendSync("get:window-info", {
+    getPluginInfo: (id: string) : any => {
+        return _sendSync("main:get:plugin-info", {
             id
         })
     },

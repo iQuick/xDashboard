@@ -4,6 +4,17 @@ const isMoon = true
 const isLock = false
 const isTop = false
 const dragging = false
+
+const maximize = () => {
+    window.plugin.maximize("demo")
+}
+const minimize = () => {
+    window.plugin.minimize("demo")
+}
+const close = () => {
+    window.plugin.close("demo")
+}
+
 </script>
 
 <template>
@@ -18,7 +29,7 @@ const dragging = false
           'hover:text-red-300': isSun,
           'hover:text-red-500': isMoon,
         }"
-        @click=""
+        @click="close"
       ></svg>
       <svg
         class="i-ic-twotone-remove-circle text-yellow"
@@ -26,7 +37,7 @@ const dragging = false
           'hover:text-yellow-300': isSun,
           'hover:text-yellow-500': isMoon,
         }"
-        @click=""
+        @click="minimize"
       ></svg>
       <svg
         class="i-ic-twotone-expand-circle-down text-green"
@@ -35,7 +46,7 @@ const dragging = false
           'hover:text-green-500': isMoon,
           'rotate-180': isTop,
         }"
-        @click=""
+        @click="maximize"
       ></svg>
     </ul>
     <ul

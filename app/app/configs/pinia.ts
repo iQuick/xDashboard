@@ -59,7 +59,7 @@ export function useSettingStoreWithOut() {
 export const userProxyStore = defineStore('app-proxy', {
     state: (): Proxy => ({
         enable: false,
-        host: '0.0.0.0',
+        host: '127.0.0.1',
         port: 7890,
         username: '',
         password: ''

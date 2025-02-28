@@ -12,7 +12,7 @@ export default defineConfig({
     build: {
         lib: {
             entry: resolve(__dirname, 'src/index.js'),
-            name: 'TLayout',
+            name: 'xdash-desp',
             formats: ['es', 'umd', 'cjs'],
             fileName: (format) => {
                 if (format === 'es') return 'index.mjs';

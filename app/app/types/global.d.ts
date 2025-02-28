@@ -9,10 +9,14 @@ interface Window {
     mainMinimize: () => void;
     mainClose: () => void;
     getAppInfo: () => any;
-    getWindowInfo: (id: string) => any;
+    getPluginInfo: (id: string) => any;
   }
   plugin: {
     __event__: Record<string, unknown>;
     hooks: Record<string, unknown>;
+    maximize: (id: string) => void;
+    minimize: (id: string) => void;
+    close: (id: string) => void;
+    getPluginInfo: (id: string) => any;
   }
 } 

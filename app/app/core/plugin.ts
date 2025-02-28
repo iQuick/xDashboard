@@ -29,7 +29,7 @@ export const createPlugin = (name: string) => {
             webviewTag: true,
             nodeIntegration: true,
             scrollBounce: true,
-            preload: join(__dirname, "../preload/index.js"),
+            preload: join(__dirname, "../preload/plugin.js"),
         },
     });
 
