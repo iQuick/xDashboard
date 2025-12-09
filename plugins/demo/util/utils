@@ -10,6 +10,7 @@ export function copySetting(root, outDir) {
         try {
           const pkg = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
           const setting = pkg.setting ? pkg.setting : {}
+          setting.logo = pkg.logo
           setting.name = pkg.name
           setting.version = pkg.version
           setting.description = pkg.description

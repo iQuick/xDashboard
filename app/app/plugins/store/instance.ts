@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
-import {pinia} from "../configs/pinia";
-import { toCamelCase } from "../utils/Util";
+import {pinia} from "@/configs/pinia";
+import { toCamelCase } from "@/utils/Util";
 
 const usePluginStores = {} as { [key: string]: any }
 

@@ -26,7 +26,7 @@ var electron_vite_config_default = defineConfig({
       outDir: "public/preload",
       rollupOptions: {
         input: {
-          index: "app/preload.ts"
+          index: "app/plugin.ts"
         }
       }
     }

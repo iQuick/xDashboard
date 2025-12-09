@@ -1,6 +1,8 @@
 import { app, BrowserWindow, IpcMainEvent } from "electron";
 
-import { createPluginInstanceWindow } from "./plugin";
+import { createPluginInstanceWindow, getPlugins, uninstallPlugin } from "./plugin";
+
+
 import { initTray } from "./tray";
 import { createMainWindow } from "./main";
 import { ipcMain } from 'electron';
@@ -128,9 +130,15 @@ const api_listener = (event: IpcMainEvent, data: any) => {
         case "main:get:plugin-info":
             event.returnValue = getWindowInfo(dt['id'])
             break
+        case "main:get:plugins":
+            event.returnValue = getPlugins();
+            break;
         case "main:func:local-install":
             const localPluginPath = dt['localPluginPath'];
             // 处理本地安装逻辑
+            break;
+        case "main:func:plugin-uninstall":
+            event.returnValue = uninstallPlugin(dt['id']);
             break;
         case "plugin:func:maximize":
             getWindow("demo").maximize()

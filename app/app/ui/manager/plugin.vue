@@ -1,54 +1,17 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { DeleteOutlined, PlusOutlined, DownOutlined } from '@ant-design/icons-vue'
+import { usePluginStoreWithOut } from '../../plugins/store/plugin'
+import { storeToRefs } from 'pinia'
 
-interface PluginInstance {
-  id: string
-  name: string
-  isOpen: boolean
-}
-
-interface Plugin {
-  id: string
-  icon: string
-  title: string
-  description: string
-  version: string
-  instances: PluginInstance[]
-  author: string
-  hasUpdate?: boolean
-  latestVersion?: string
-}
-
-const plugins = ref<Plugin[]>([
-  {
-    id: 'demo-plugin',
-    icon: '🔌',
-    title: 'Demo Plugin',
-    description: '这是一个示例插件，展示插件的基本功能',
-    version: '1.0.0',
-    instances: [
-      { id: 'demo-1', name: 'Demo 1', isOpen: true },
-      { id: 'demo-2', name: 'Demo 2', isOpen: false }
-    ],
-    author: 'John Doe',
-    hasUpdate: true,
-    latestVersion: '1.1.0'
-  },
-  {
-    id: 'network-monitor',
-    icon: '📊',
-    title: '网络监控',
-    description: '实时监控网络状态、流量统计等',
-    version: '1.2.0',
-    instances: [
-      { id: 'net-1', name: '主路由监控', isOpen: true }
-    ],
-    author: 'Jane Smith'
-  }
-])
+const pluginStore = usePluginStoreWithOut()
+const { plugins } = storeToRefs(pluginStore)
 
 const expandedPlugins = ref<Set<string>>(new Set())
+
+onMounted(() => {
+  pluginStore.fetchPlugins()
+})
 
 const toggleExpand = (pluginId: string) => {
   if (expandedPlugins.value.has(pluginId)) {
@@ -59,18 +22,17 @@ const toggleExpand = (pluginId: string) => {
 }
 
 const createInstance = (id: string) => {
-  // TODO: 创建插件实例
-  console.log('创建插件实例:', id)
+  pluginStore.createInstance(id)
+  setTimeout(() => pluginStore.fetchPlugins(), 500) // Refresh list
 }
 
 const deleteInstance = (id: string, instanceId: string) => {
-  // TODO: 删除插件实例
+  // TODO: Implement delete logic in store
   console.log('Remove plugin instance :', id, instanceId)
 }
 
 const uninstallPlugin = (id: string) => {
-  // TODO: 卸载插件
-  console.log('Uninstallation plugin:', id)
+  pluginStore.uninstallPlugin(id)
 }
 
 const updatePlugin = (id: string) => {
@@ -105,7 +67,8 @@ const toggleInstance = (instanceId: string, isOpen: boolean) => {
           <div class="plugin-header">
             <div class="plugin-info">
               <div class="icon-wrapper">
-                <span class="icon">{{ plugin.icon }}</span>
+                <img v-if="plugin.logo" :src="plugin.logo" class="plugin-logo" />
+                <span v-else class="icon">{{ plugin.icon || '🧩' }}</span>
               </div>
               <div class="details">
                 <h3 class="title">
@@ -120,6 +83,7 @@ const toggleInstance = (instanceId: string, isOpen: boolean) => {
             </div>
             <div class="actions">
               <a-button 
+                v-if="plugin.source !== 'built-in'"
                 type="text"
                 danger
                 class="uninstall-btn"
@@ -258,6 +222,13 @@ const toggleInstance = (instanceId: string, isOpen: boolean) => {
               .icon {
                 font-size: 32px;
                 line-height: 1;
+              }
+              
+              .plugin-logo {
+                width: 48px;
+                height: 48px;
+                object-fit: contain;
+                border-radius: 8px;
               }
             }
             

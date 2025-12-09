@@ -27,8 +27,8 @@ export default defineConfig({
       outDir: "public/preload",
       rollupOptions: {
         input: {
-          index: "app/preload.ts",
-          plugin: "app/plugins/preload.ts",
+          index: "app/plugins/preload/index.ts",
+          plugin: "app/plugins/preload/plugin.ts",
         },
       },
     },

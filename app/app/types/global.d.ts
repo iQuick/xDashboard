@@ -10,6 +10,7 @@ interface Window {
     mainClose: () => void;
     getAppInfo: () => any;
     getPluginInfo: (id: string) => any;
+    getPlugins: () => any[];
   }
   plugin: {
     __event__: Record<string, unknown>;

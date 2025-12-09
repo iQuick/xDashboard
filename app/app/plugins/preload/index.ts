@@ -1,5 +1,5 @@
-import {electronAPI} from '@electron-toolkit/preload'
-import {contextBridge, ipcRenderer, shell} from 'electron'
+import { electronAPI } from '@electron-toolkit/preload'
+import { contextBridge, ipcRenderer, shell } from 'electron'
 
 // contextBridge.exposeInMainWorld('api', electronAPI.ipcRenderer)
 
@@ -31,7 +31,7 @@ window.xds = {
     mainClose: () => {
         _send("main:func:close")
     },
-    pluginCreate: (name: string) =>{
+    pluginCreate: (name: string) => {
         _send("main:func:plugin-create", {
             'name': name
         })
@@ -46,12 +46,15 @@ window.xds = {
             id
         })
     },
-    getAppInfo: () : any => {
+    getAppInfo: (): any => {
         return _sendSync("main:get:app-info")
     },
-    getPluginInfo: (id: string) : any => {
+    getPluginInfo: (id: string): any => {
         return _sendSync("main:get:plugin-info", {
             id
         })
+    },
+    getPlugins: (): any => {
+        return _sendSync("main:get:plugins")
     },
 }

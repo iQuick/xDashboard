@@ -1,7 +1,7 @@
 import { createI18n } from "vue-i18n";
 
 const loadLocale = async (name) => {
-  const data = await import(`../langs/${name}.ts`);
+  const data = await import(`../plugins/langs/${name}.ts`);
   return { [name]: data.default };
 };
 

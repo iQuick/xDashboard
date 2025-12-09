@@ -50,5 +50,8 @@ window.xds = {
     return _sendSync("main:get:plugin-info", {
       id
     });
+  },
+  getPlugins: () => {
+    return _sendSync("main:get:plugins");
   }
 };
