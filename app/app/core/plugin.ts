@@ -2,7 +2,7 @@ import { join } from "node:path";
 import { BrowserWindow } from "electron";
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { pluginPath, pluginInstancePath } from "./constants";
-import { generateUUID } from "../utils/Util";
+import { generateUUID } from "@/utils/Util";
 import { readFileSync } from "node:fs";
 
 export const createPluginInstance = (pluginName: string) => {

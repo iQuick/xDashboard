@@ -115,7 +115,7 @@ const api_listener = (event: IpcMainEvent, data: any) => {
             break;
         case "main:func:plugin-create":
             const pluginName = dt['pluginName'];
-            createPluginInstance(pluginName);
+            // createPluginInstance(pluginName);
             break;
         case "main:func:plugin-active":
             // createPluginWindow('demo', 'demo')
@@ -128,6 +128,10 @@ const api_listener = (event: IpcMainEvent, data: any) => {
         case "main:get:plugin-info":
             event.returnValue = getWindowInfo(dt['id'])
             break
+        case "main:func:local-install":
+            const localPluginPath = dt['localPluginPath'];
+            // 处理本地安装逻辑
+            break;
         case "plugin:func:maximize":
             getWindow("demo").maximize()
             break;
@@ -139,10 +143,6 @@ const api_listener = (event: IpcMainEvent, data: any) => {
             break;
         case "plugin:get:plugin-info":
             event.returnValue = getWindowInfo("demo")
-            break;
-        case "main:func:local-install":
-            const localPluginPath = dt['localPluginPath'];
-            // 处理本地安装逻辑
             break;
     }
 }
