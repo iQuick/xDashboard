@@ -20,6 +20,7 @@ const _send = (event, data: any = null) => {
     })
 }
 
+
 window.plugin = {
     __event__: {},
     hooks: {},

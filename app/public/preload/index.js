@@ -16,7 +16,7 @@ const _send = (event, data = null) => {
     data
   });
 };
-window.xds = {
+window.main = {
   __event__: {},
   hooks: {},
   mainMaximize: () => {

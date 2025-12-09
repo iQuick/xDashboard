@@ -1,5 +1,5 @@
 interface Window {
-  xds: {
+  main: {
     __event__: Record<string, unknown>;
     hooks: Record<string, unknown>;
     pluginCreate: (name: string) => void;

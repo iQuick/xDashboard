@@ -12,15 +12,15 @@ const props = defineProps<{
 }>();
 
 const handleMinimize = () => {
-  window.xds.mainMinimize()
+  window.main.mainMinimize()
 }
 
 const handleMaximize = () => {
-  window.xds.mainMaximize()
+  window.main.mainMaximize()
 }
 
 const handleClose = () => {
-  window.xds.mainClose()
+  window.main.mainClose()
 }
 </script>
 

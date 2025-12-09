@@ -23,14 +23,14 @@ export const usePluginStore = defineStore('plugin', {
     actions: {
         fetchPlugins() {
             // @ts-ignore
-            const list = window.xds.getPlugins();
+            const list = window.main.getPlugins();
             if (Array.isArray(list)) {
                 this.plugins = list;
             }
         },
         createInstance(id: string) {
             // @ts-ignore
-            window.xds.pluginCreate(id);
+            window.main.pluginCreate(id);
         },
         // TODO: Implement Uninstall
         uninstallPlugin(id: string) {
