@@ -1,16 +1,24 @@
 "use strict";
 const require$$0 = require("electron");
 const node_path = require("node:path");
+require("fs");
+require("node:fs");
 const path = require("path");
-const createPlugin = (name2) => {
-  const path2 = `file://${node_path.join(__dirname, `../plugins/${name2}/index.html`)}`;
-  const ico = node_path.join(__dirname, `../plugins/${name2}/favicon.ico`);
+require$$0.app.getAppPath();
+const userDataPath = require$$0.app.getPath("userData");
+node_path.join(userDataPath, "plugin");
+node_path.join(userDataPath, "pluginInstance");
+const createPluginInstanceWindow = (setting) => {
+  const path2 = `file://${node_path.join(__dirname, `../plugins/${name}/index.html`)}`;
+  const ico = node_path.join(__dirname, `../plugins/${name}/favicon.ico`);
   const window = new require$$0.BrowserWindow({
-    width: 800,
-    height: 600,
+    x: setting.x,
+    y: setting.y,
+    width: setting.width,
+    height: setting.height,
     icon: ico,
-    title: name2,
-    frame: true,
+    title: setting.name,
+    frame: false,
     resizable: true,
     hasShadow: false,
     transparent: false,
@@ -33,10 +41,10 @@ const createPlugin = (name2) => {
   window.center();
   window.webContents.openDevTools();
   console.log("plugin path : ", path2);
-  window.loadURL(path2, { hash: name2 });
+  window.loadURL(path2, { hash: name });
   return window;
 };
-const name = "xDashboard";
+const name$1 = "xDashboard";
 const version = "0.0.1";
 const main = "public/core/index.js";
 const scripts = {
@@ -83,7 +91,7 @@ const engines = {
   node: ">=18.12.0"
 };
 const pkg = {
-  name,
+  name: name$1,
   version,
   "private": true,
   main,
@@ -93,6 +101,21 @@ const pkg = {
   engines
 };
 const trayIcon = path.join(__dirname, "../images/tray.png");
+const scanPlugins = () => {
+  return [
+    {
+      label: `插件1`,
+      click: () => {
+      }
+    },
+    { type: "separator" },
+    {
+      label: `插件2`,
+      click: () => {
+      }
+    }
+  ];
+};
 const menus = () => {
   return [
     {
@@ -103,15 +126,15 @@ const menus = () => {
     },
     { type: "separator" },
     {
+      label: `插件`,
+      submenu: scanPlugins()
+    },
+    { type: "separator" },
+    {
       label: `重启`,
       click: () => {
         require$$0.app.relaunch();
         require$$0.app.quit();
-      }
-    },
-    {
-      label: `重置`,
-      click: () => {
       }
     },
     {
@@ -261,7 +284,7 @@ dist.ipcHelper = ipcHelper;
 var is_1 = dist.is = is;
 dist.optimizer = optimizer;
 dist.platform = platform;
-const createMain = () => {
+const createMainWindow = () => {
   const name2 = "xDashboard";
   const ico = node_path.join(__dirname, "../images/favicon.ico");
   const window = new require$$0.BrowserWindow({
@@ -297,11 +320,13 @@ const createMain = () => {
   }
   return window;
 };
+const MID = "main";
+const windows = {};
 require$$0.app.disableHardwareAcceleration();
 require$$0.app.on("ready", async () => {
   console.log("app ready");
   initTray();
-  createMainWindow();
+  createMain();
   registerApis();
 });
 require$$0.app.on("activate", () => {
@@ -314,20 +339,15 @@ require$$0.app.on("window-all-closed", () => {
 require$$0.app.on("before-quit", () => {
   unregisterApis();
 });
-const windows = {};
-const createMainWindow = () => {
-  if (windows["main"]) {
-    windows["main"].active();
-  } else {
-    windows["main"] = createMain();
-  }
+const createMain = () => {
+  const window = createMainWindow();
+  windows[MID] = window;
+  return window;
 };
-const createPluginWindow = (id, name2) => {
-  if (windows[id]) {
-    windows[id].active();
-  } else {
-    windows[id] = createPlugin(name2);
-  }
+const createPluginInstance = (pid, setting) => {
+  const window = createPluginInstanceWindow(setting);
+  windows[pid] = window;
+  return window;
 };
 const getWindow = (id) => {
   return windows[id];
@@ -362,9 +382,10 @@ const api_listener = (event, data) => {
       getWindow("main").close();
       break;
     case "main:func:plugin-create":
+      const pluginName = dt["pluginName"];
+      createPluginInstance(pluginName);
       break;
     case "main:func:plugin-active":
-      createPluginWindow("demo", "demo");
       break;
     case "main:func:plugin-deactivate":
       break;
@@ -385,6 +406,9 @@ const api_listener = (event, data) => {
       break;
     case "plugin:get:plugin-info":
       event.returnValue = getWindowInfo("demo");
+      break;
+    case "main:func:local-install":
+      dt["localPluginPath"];
       break;
   }
 };

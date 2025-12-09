@@ -30,12 +30,7 @@ const routes = [
         component: () => import("@/ui/manager/about.vue"),
       },
     ],
-  },
-  {
-    path: `/plugin`,
-    component: () => import("@/ui/plugin.vue"),
-    subRoutes: [],
-  },
+  }
 ];
 
 export const router = createRouter({

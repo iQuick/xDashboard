@@ -4,12 +4,12 @@ import "@/assets/style/setting.scss";
 import Topbar from "@/components/Topbar.vue";
 
 import {reactive} from "vue";
-import {router} from "../configs/router";
-import {useSettingStoreWithOut} from "../configs/pinia";
+import {router} from "@/configs/router";
+import {useSettingStoreWithOut} from "@/configs/pinia";
 import {storeToRefs} from "pinia";
 
 const main = window.xds.getPluginInfo('main')
-const logo = '../assets/images/icon.png'
+const logo = '../../assets/images/icon.png'
 const setting = storeToRefs(useSettingStoreWithOut());
 const active = reactive(['setting']);
 const changeMenu = (key: any) => {

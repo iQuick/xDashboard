@@ -21,11 +21,11 @@ export default function TLayoutPlugin(options = {}) {
     },
     buildStart() {
       // 插件启动时的逻辑
-      console.log('插件已启动');
+      console.log('Vite plugin started');
     },
     configResolved(config) {
         // 这里可以访问 Vite 配置
-        console.log('Vite 插件加载');
+        console.log('Vite plugin loaded');
     },
     transformIndexHtml(html) {
       return html.replace(
@@ -53,7 +53,7 @@ const registerComponent = (app) => {
 }
 
 const registerProvide = (app) => {
-  app.provide('info', window.plugin.getPluginInfo())
+  app.provide('info', window.plugin.getPluginInfo)
   app.provide('maximize', window.plugin.maximize)
   app.provide('minimize', window.plugin.minimize)
   app.provide('close', window.plugin.close)

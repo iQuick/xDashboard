@@ -89,15 +89,39 @@ const uninstallPlugin = (e: Event, plugin: Plugin) => {
   e.stopPropagation()  // 阻止事件冒泡
   console.log('卸载插件:', plugin.id)
 }
+
+const createPlugin = () => {
+  // 开发插件逻辑
+}
+
+const installLocalPlugin = () => {
+  // 本地安装逻辑
+}
 </script>
 
 <template>
   <div class="store">
+    <div class="action-container">
+      <div class="action-buttons">
+        <div class="button-group">
+          <div class="custom-button primary" @click="createPlugin">开发插件</div>
+          <p class="description">
+            允许用户创建新的插件实例，扩展应用功能。
+          </p>
+        </div>
+        <div class="button-group">
+          <div class="custom-button default" @click="installLocalPlugin">本地安装</div>
+          <p class="description">
+            从本地文件系统安装插件，方便用户使用自定义插件。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
     <div class="grid">
-      <div v-for="plugin in plugins" 
-           :key="plugin.id" 
-           class="card"
-      >
+      <div v-for="plugin in plugins" :key="plugin.id" class="card">
         <div v-if="plugin.installed" class="card-actions">
           <a-button 
             type="text"
@@ -145,12 +169,73 @@ const uninstallPlugin = (e: Event, plugin: Plugin) => {
 <style lang="scss" scoped>
 .store {
   padding: 24px;
-  
+
+  .action-container {
+    margin-bottom: 16px;
+
+    .action-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+
+      .button-group {
+        flex: 1;
+        margin: 0 8px;
+        text-align: center;
+        background-color: #f9f9f9;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 16px;
+        
+        .custom-button {
+          padding: 12px;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 16px;
+          transition: background-color 0.3s, transform 0.2s;
+
+          &.primary {
+            background-color: #007bff;
+            color: white;
+
+            &:hover {
+              background-color: #0056b3;
+              transform: translateY(-2px);
+            }
+          }
+
+          &.default {
+            background-color: #f0f0f0;
+            color: #333;
+
+            &:hover {
+              background-color: #e0e0e0;
+              transform: translateY(-2px);
+            }
+          }
+        }
+
+        .description {
+          font-size: 14px;
+          color: #666;
+          margin-top: 8px;
+        }
+      }
+    }
+  }
+
+  .divider {
+    height: 2px;
+    background-color: var(--color-border);
+    margin: 16px 0;
+    border-radius: 4px;
+  }
+
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 24px;
-    
+
     .card {
       display: flex;
       flex-direction: column;
@@ -160,11 +245,10 @@ const uninstallPlugin = (e: Event, plugin: Plugin) => {
       border-radius: 8px;
       transition: var(--transition-all);
       position: relative;
-      
+
       &:hover {
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        border: 1px solid var(--color-border-hover);
       }
       
       .card-actions {

@@ -1,8 +1,14 @@
 {
   "name": "demo",
+  "description": "这是一个测试 Demo",
+  "author": "xioobu",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "setting": {
+    "width": 800,
+    "height": 600
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",

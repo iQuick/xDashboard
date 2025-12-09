@@ -1,17 +1,20 @@
-import {app, BrowserWindow, IpcMainEvent} from "electron";
+import { app, BrowserWindow, IpcMainEvent } from "electron";
 
-import {createPlugin, initPlugin} from "./plugin";
-import {initTray} from "./tray";
-import {createMain} from "./main";
-import {ipcMain} from 'electron';
+import { createPluginInstanceWindow } from "./plugin";
+import { initTray } from "./tray";
+import { createMainWindow } from "./main";
+import { ipcMain } from 'electron';
 
+
+// 窗口管理
+const MID = "main"
+const windows: { [key: string]: BrowserWindow } = {};
 
 app.disableHardwareAcceleration()
 app.on("ready", async () => {
     console.log("app ready");
-    initTray();
-    initPlugin();
-    createMainWindow()
+    initTray()
+    createMain()
     registerApis()
 });
 
@@ -30,19 +33,14 @@ app.on('before-quit', () => {
 })
 
 
-// 窗口管理
-const windows = {}
-
 /**
  * 创建主窗口
  * 判断 windows 中是否存在，不存在则创建，存在则激活
  */
-const createMainWindow = () => {
-    if (windows['main']) {
-        windows['main'].active()
-    } else {
-        windows['main'] = createMain()
-    }
+const createMain = (): BrowserWindow => {
+    const window = createMainWindow()
+    windows[MID] = window
+    return window
 }
 
 /**
@@ -50,12 +48,17 @@ const createMainWindow = () => {
  * @param id 窗口 id
  * @param name  窗口名称
  */
-const createPluginWindow = (id:string, name: string) => {
-    if (windows[id]) {
-        windows[id].active()
-    } else {
-        windows[id] = createPlugin(name)
-    }
+const createPlugin = (id: string, name: string): BrowserWindow | null => {
+    // const window = createPluginWindow(name)
+    // windows[id] = window
+    // return window
+    return null;
+}
+
+const createPluginInstance = (pid: string, setting: PluginInstanceSetting): BrowserWindow => {
+    const window = createPluginInstanceWindow(setting)
+    windows[pid] = window
+    return window
 }
 
 /**
@@ -68,7 +71,7 @@ const getWindow = (id: string): BrowserWindow => {
 
 /**
  * 获取 window 信息
- * @param id 
+ * @param id
  */
 const getWindowInfo = (id: string) => {
     const win = getWindow(id)
@@ -82,7 +85,7 @@ const getWindowInfo = (id: string) => {
 
 /**
  * 获取应用信息
- * @returns 
+ * @returns
  */
 const getAppInfo = () => {
     return {
@@ -93,8 +96,8 @@ const getAppInfo = () => {
 
 /**
  * Api 事件监听
- * @param event 
- * @param data 
+ * @param event
+ * @param data
  */
 const api_listener = (event: IpcMainEvent, data: any) => {
     console.log('api_listener', data)
@@ -111,9 +114,11 @@ const api_listener = (event: IpcMainEvent, data: any) => {
             getWindow('main').close()
             break;
         case "main:func:plugin-create":
+            const pluginName = dt['pluginName'];
+            createPluginInstance(pluginName);
             break;
         case "main:func:plugin-active":
-            createPluginWindow('demo', 'demo')
+            // createPluginWindow('demo', 'demo')
             break;
         case "main:func:plugin-deactivate":
             break;
@@ -134,6 +139,10 @@ const api_listener = (event: IpcMainEvent, data: any) => {
             break;
         case "plugin:get:plugin-info":
             event.returnValue = getWindowInfo("demo")
+            break;
+        case "main:func:local-install":
+            const localPluginPath = dt['localPluginPath'];
+            // 处理本地安装逻辑
             break;
     }
 }

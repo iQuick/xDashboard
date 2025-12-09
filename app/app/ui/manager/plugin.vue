@@ -65,17 +65,17 @@ const createInstance = (id: string) => {
 
 const deleteInstance = (id: string, instanceId: string) => {
   // TODO: 删除插件实例
-  console.log('删除插件实例:', id, instanceId)
+  console.log('Remove plugin instance :', id, instanceId)
 }
 
 const uninstallPlugin = (id: string) => {
   // TODO: 卸载插件
-  console.log('卸载插件:', id)
+  console.log('Uninstallation plugin:', id)
 }
 
 const updatePlugin = (id: string) => {
   // TODO: 执行插件更新
-  console.log('更新插件:', id)
+  console.log('Update plugin:', id)
 }
 
 const toggleInstance = (instanceId: string, isOpen: boolean) => {

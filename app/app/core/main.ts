@@ -3,7 +3,7 @@ import {join} from "node:path";
 import {is} from "@electron-toolkit/utils";
 import {BrowserWindow} from "electron";
 
-export const createMain = () => {
+export const createMainWindow = () => {
     const name = "xDashboard";
     const ico = join(__dirname, '../images/favicon.ico');
     const window = new BrowserWindow({

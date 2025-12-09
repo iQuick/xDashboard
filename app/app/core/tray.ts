@@ -3,7 +3,23 @@ import { app, BrowserWindow, Menu, nativeImage, shell, Tray } from "electron";
 import pkg from "~/package.json";
 import trayIcon from "~/public/images/tray.png?asset";
 
-const menus = () => {
+const scanPlugins = () => {
+  return [
+    {
+      label: `插件1`,
+      click: () => {
+      },
+    },
+    { type: "separator" },
+    {
+      label: `插件2`,
+      click: () => {
+      },
+    },
+  ]
+}
+
+const menus = (): {}[] => {
   return [
     {
       icon: trayIcon,
@@ -14,15 +30,16 @@ const menus = () => {
     },
     { type: "separator" },
     {
+      label: `插件`,
+      submenu: scanPlugins()
+    },
+    { type: "separator" },
+    {
       label: `重启`,
       click: () => {
         app.relaunch();
         app.quit();
       },
-    },
-    {
-      label: `重置`,
-      click: () => {},
     },
     {
       label: `退出`,
@@ -31,7 +48,8 @@ const menus = () => {
     { type: "separator" },
     {
       label: `关于`,
-      click: () => {},
+      click: () => {
+      },
     },
   ];
 };
