@@ -1,0 +1,13 @@
+.setting .item[data-v-1b13c4d1] {
+  display: flex;
+  justify-content: space-between;
+  justify-items: center;
+  align-items: center;
+  padding: 16px 24px;
+  margin: 16px;
+  background: var(--color-item-color);
+  border-radius: 8px;
+}
+.setting .item span[data-v-1b13c4d1] {
+  color: var(--color-text-content);
+}

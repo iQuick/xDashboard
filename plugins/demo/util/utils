@@ -1,0 +1,23 @@
+import fs from 'fs';
+import path from 'path';
+
+export function copySetting(root, outDir) {
+    return {
+      name: 'copy-setting',
+      writeBundle(options, bundle) {
+        const packageJsonPath = path.resolve(root, './package.json'); //package.json的路径
+        const settingJsonPath = path.resolve(outDir, './setting.json'); //setting.json的输出路径
+        try {
+          const pkg = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
+          const setting = pkg.setting ? pkg.setting : {}
+          setting.name = pkg.name
+          setting.version = pkg.version
+          setting.description = pkg.description
+          setting.author = pkg.author
+          fs.writeFileSync(settingJsonPath, JSON.stringify(setting), 'utf-8');
+        } catch (error) {
+          console.error('Error reading or writing setting.json:', error);
+        }
+      },
+    };
+  }
