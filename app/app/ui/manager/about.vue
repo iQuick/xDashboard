@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const appInfo = window.xds.getAppInfo()
+const appInfo = window.main.getInfo()
 const version = appInfo.version
 </script>
 
