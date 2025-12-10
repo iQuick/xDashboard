@@ -2,6 +2,21 @@ import { join } from "node:path";
 import { existsSync, readFileSync, readdirSync, statSync, rmdirSync, rmSync } from "fs";
 import { appPath, pluginPath} from "./xds";
 
+export const installPlugin = (pluginId: string): boolean => {
+    // Only allow installing from user plugin path
+    const targetDir = join(pluginPath, pluginId);
+    if (existsSync(targetDir)) {
+        console.error(`Plugin ${pluginId} already exists`);
+        return false;
+    }
+    const sourceDir = join(appPath, 'public/plugins', pluginId);
+    if (!existsSync(sourceDir)) {
+        console.error(`Plugin ${pluginId} not found`);
+        return false;
+    }
+    return true;
+}
+
 export const uninstallPlugin = (pluginId: string): boolean => {
     // Only allow uninstalling from user plugin path
     const targetDir = join(pluginPath, pluginId);
@@ -35,6 +50,7 @@ export const getPlugins = () => {
                             id: item,
                             dir: itemPath,
                             source,
+                            start: `file://${join(itemPath, config.start ? config.start : 'index.html')}`,
                             logo: config.logo ? `file://${join(itemPath, config.logo)}` : undefined
                         });
                     } catch (e) {

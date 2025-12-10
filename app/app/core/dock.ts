@@ -2,7 +2,7 @@ import { join } from "node:path";
 import { dockPath } from "./xds";
 import { BrowserWindow } from "electron";
 
-export const create = (pluginName: string) => {
+export const createDock = (pluginName: string) => {
     // const pluginDir = join(pluginInstancePath, pluginName)
     // if (!existsSync(pluginDir)) {
     //     mkdirSync(pluginDir, { recursive: true })
@@ -14,7 +14,9 @@ export const create = (pluginName: string) => {
     // }))
 }
 
+export const removeDock = () => {
 
+}
 
 
 export const on_event = (event: string, callback: (data: any) => void) => {

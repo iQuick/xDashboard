@@ -1,12 +1,12 @@
 import {app, BrowserWindow} from "electron";
 import {join} from "node:path";
 import {is} from "@electron-toolkit/utils";
+import pkg from "~/package.json";
 
 export const appPath = app.getAppPath();
 export const userDataPath = app.getPath("userData");
 export const pluginPath = join(userDataPath, "plugins");
 export const dockPath = join(userDataPath, "docks");
-import pkg from "~/package.json";
 
 // 窗口管理
 const _windows: { [key: string]: BrowserWindow } = {};
@@ -98,7 +98,7 @@ export const createMainWindow = () => {
         },
     });
     window.removeMenu();
-    // window.webContents.openDevTools();
+    window.webContents.openDevTools();
 
     if (is.dev && process.env["ELECTRON_RENDERER_URL"]) {
         window.loadURL(process.env["ELECTRON_RENDERER_URL"]);

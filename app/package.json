@@ -1,6 +1,6 @@
 {
   "name": "xDashboard",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "website": "https://github.com/iQuick/xDashboard",
   "main": "public/core/index.js",

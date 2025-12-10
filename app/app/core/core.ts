@@ -16,6 +16,8 @@ app.on("ready", async () => {
     createTray()
     createMain()
     registerApis()
+    console.log("plugins : ")
+    console.log(plugin.getPlugins())
 });
 
 app.on("activate", () => {
