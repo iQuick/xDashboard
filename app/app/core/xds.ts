@@ -1,6 +1,6 @@
-import {app, BrowserWindow} from "electron";
-import {join} from "node:path";
-import {is} from "@electron-toolkit/utils";
+import { app, BrowserWindow } from "electron";
+import { join } from "node:path";
+import { is } from "@electron-toolkit/utils";
 import pkg from "~/package.json";
 
 export const appPath = app.getAppPath();
@@ -103,7 +103,7 @@ export const createMainWindow = () => {
     if (is.dev && process.env["ELECTRON_RENDERER_URL"]) {
         window.loadURL(process.env["ELECTRON_RENDERER_URL"]);
     } else {
-        window.loadFile(join(__dirname, "../renderer/index.html"), {hash: name});
+        window.loadFile(join(__dirname, "../renderer/index.html"));
     }
     return window;
 };
@@ -139,6 +139,6 @@ export const createDockWindow = (id: string, setting: DockSetting) => {
     });
 
     window.removeMenu();
-    window.loadURL(setting.path, {hash: id});
+    window.loadURL(setting.path);
     return window;
 };

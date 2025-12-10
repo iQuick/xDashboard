@@ -7,7 +7,11 @@
   "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
   "files": ["dist", "public"],
   "directories": {
-    "output": "release"
+    "output": "release/${version}"
+  },
+  "extraResources": {
+    "from": "public/images",
+    "to": "public/images"
   },
   "mac": {
     "entitlementsInherit": "public/build/os/entitlements.mac.plist",
@@ -15,9 +19,7 @@
   },
   "win": {
     "target": [
-      { "target": "nsis", "arch": ["x64"] },
-      { "target": "msi", "arch": ["x64"] },
-      { "target": "7z", "arch": ["x64"] }
+      { "target": "nsis", "arch": ["x64"] }
     ]
   },
   "linux": {
@@ -25,5 +27,9 @@
       { "target": "AppImage", "arch": ["x64"] },
       { "target": "deb", "arch": ["x64"] }
     ]
+  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": false
   }
 }

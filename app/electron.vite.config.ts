@@ -1,8 +1,8 @@
-import {resolve} from "node:path";
+import { resolve } from "node:path";
 
 import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
 import vue from "@vitejs/plugin-vue";
-import {defineConfig} from "electron-vite";
+import { defineConfig } from "electron-vite";
 
 export default defineConfig({
     main: {
@@ -34,6 +34,7 @@ export default defineConfig({
         },
     },
     renderer: {
+        base: './',
         root: "app",
         plugins: [vue(), VueI18nPlugin({})],
         resolve: {

@@ -7,10 +7,10 @@ import {reactive} from "vue";
 import {router} from "@/configs/router";
 import {useSettingStoreWithOut} from "@/configs/pinia";
 import {storeToRefs} from "pinia";
+import logo from '@/assets/images/icon.png'
 
 const main = window.main.getInfo()
 const name = `${main.name} v${main.version}`
-const logo = '../../assets/images/icon.png'
 const setting = storeToRefs(useSettingStoreWithOut());
 const active = reactive(['setting']);
 const changeMenu = (key: any) => {

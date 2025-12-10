@@ -8,6 +8,7 @@ import {router} from "@/configs/router";
 import App from "./app.vue";
 import Antd from "ant-design-vue";
 
+console.log("app start")
 
 const app = createApp(App)
 app.use(Antd)
