@@ -10,8 +10,11 @@ export interface Plugin {
     width?: number;
     height?: number;
     dir: string;
-    source: 'built-in' | 'user';
+    source: 'system' | 'user';
     instances: any[]; // Defined more strictly if possible
+    logo?: string;
+    hasUpdate?: boolean;
+    latestVersion?: string;
     // Add other fields from setting.json if needed
     [key: string]: any;
 }
@@ -23,10 +26,13 @@ export const usePluginStore = defineStore('plugin', {
     actions: {
         fetchPlugins() {
             // @ts-ignore
-            const list = window.main.getPlugins();
+            const list = window.plugin.getPlugins();
             if (Array.isArray(list)) {
                 this.plugins = list;
             }
+        },
+        getPluginById(id: string): Plugin | undefined {
+            return this.plugins.find(plugin => plugin.id === id);
         },
         createInstance(id: string) {
             // @ts-ignore
@@ -35,6 +41,13 @@ export const usePluginStore = defineStore('plugin', {
         // TODO: Implement Uninstall
         uninstallPlugin(id: string) {
             console.log('Uninstall', id);
+            // @ts-ignore
+            // window.plugin.uninstallPlugin(id);
+        },
+        updatePlugin(id: string) {
+            console.log('Update plugin:', id);
+            // @ts-ignore
+            // window.plugin.updatePlugin(id);
         }
     }
 });

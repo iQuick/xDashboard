@@ -3,6 +3,12 @@ export default {
     cancel: '取消',
     expanded: '展开',
     collapsed: '收起',
+    install: '安装',
+    uninstall: '卸载',
+    upgrade: '升级',
+    update: '更新',
+    update_plugin: '更新',
+    uninstall_plugin: '卸载应用',
     themes: {
         light: "明亮",
         dark: "黑暗"

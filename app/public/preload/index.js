@@ -18,14 +18,6 @@ window.main = {
   },
   getInfo: () => {
     return index.sendEventSync("main:get-info");
-  },
-  getPlugin: (id) => {
-    return index.sendEventSync("main:get-plugin", {
-      id
-    });
-  },
-  getPlugins: () => {
-    return index.sendEventSync("main:get-plugins");
   }
 };
 window.plugin = {
@@ -37,7 +29,7 @@ window.plugin = {
     });
   },
   uninstall: (id) => {
-    index.sendEvent("plugin:minimize", {
+    index.sendEvent("plugin:uninstall", {
       id
     });
   },
@@ -45,5 +37,13 @@ window.plugin = {
     return index.sendEventSync("plugin:get-info", {
       id
     });
+  },
+  getPlugin: (id) => {
+    return index.sendEventSync("plugin:get-plugin", {
+      id
+    });
+  },
+  getPlugins: () => {
+    return index.sendEventSync("plugin:get-plugins");
   }
 };

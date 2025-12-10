@@ -18,14 +18,6 @@ window.main = {
     getInfo: (): any => {
         return sendEventSync("main:get-info")
     },
-    getPlugin: (id: string): any => {
-        return sendEventSync("main:get-plugin", {
-            id
-        })
-    },
-    getPlugins: (): any => {
-        return sendEventSync("main:get-plugins")
-    },
 }
 
 window.plugin = {
@@ -37,7 +29,7 @@ window.plugin = {
         })
     },
     uninstall: (id: string) => {
-        sendEvent("plugin:minimize", {
+        sendEvent("plugin:uninstall", {
             id
         })
     },
@@ -45,5 +37,13 @@ window.plugin = {
         return sendEventSync("plugin:get-info", {
             id
         })
-    }
+    },
+    getPlugin: (id: string): any => {
+        return sendEventSync("plugin:get-plugin", {
+            id
+        })
+    },
+    getPlugins: (): any => {
+        return sendEventSync("plugin:get-plugins")
+    },
 }

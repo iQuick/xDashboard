@@ -19,5 +19,5 @@ export const removeDock = () => {
 }
 
 
-export const on_event = (event: string, callback: (data: any) => void) => {
+export const on_event = (event: string, data: any, callback: (data: any) => void) => {
 }

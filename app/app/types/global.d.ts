@@ -7,8 +7,6 @@ interface Window {
         show: () => void;
         close: () => void;
         getInfo: () => any;
-        getPlugin: (id: string) => any;
-        getPlugins: () => any[];
     }
     plugin: {
         __event__: Record<string, unknown>;
@@ -16,6 +14,8 @@ interface Window {
         install: (id: string) => void;
         uninstall: (id: string) => void;
         getInfo: (id: string) => any;
+        getPlugin: (id: string) => any;
+        getPlugins: () => any[];
     },
     dock: {
         __event__: Record<string, unknown>;

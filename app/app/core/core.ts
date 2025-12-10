@@ -65,11 +65,11 @@ const on_api_event = (event: IpcMainEvent, data: any) => {
             event.returnValue = result
         })
     } else if ('plugin' == e[0]) {
-        plugin.on_event(e[1], result => {
+        plugin.on_event(e[1], d,result => {
             event.returnValue = result
         })
     } else if ('dock' == e[0]) {
-        dock.on_event(e[1], result => {
+        dock.on_event(e[1], d, result => {
             event.returnValue = result
         })
     }

@@ -1,4 +1,4 @@
-import {createRouter, createWebHashHistory} from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 
 const routes = [
     {
@@ -24,6 +24,10 @@ const routes = [
             {
                 path: `plugin`,
                 component: () => import("@/ui/manager/plugin.vue"),
+            },
+            {
+                path: `plugin-detail/:id`,
+                component: () => import("@/ui/manager/plugin-detail.vue"),
             },
             {
                 path: `store`,

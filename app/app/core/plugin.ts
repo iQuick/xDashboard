@@ -1,6 +1,7 @@
 import { join } from "node:path";
 import { existsSync, readFileSync, readdirSync, statSync, rmdirSync, rmSync } from "fs";
 import { appPath, pluginPath} from "./xds";
+import * as xds from "@/core/xds";
 
 export const installPlugin = (pluginId: string): boolean => {
     // Only allow installing from user plugin path
@@ -92,5 +93,18 @@ export const getPlugins = () => {
     return plugins;
 }
 
-export const on_event = (event: string, callback: (data: any) => void) => {
+export const on_event = (event: string, data: any, callback: (data: any) => void) => {
+    switch (event) {
+        case "install":
+            break;
+        case "uninstall":
+            break;
+        case "get-info":
+            break;
+        case "get-plugin":
+            break;
+        case "get-plugins":
+            callback(getPlugins())
+            break;
+    }
 }
