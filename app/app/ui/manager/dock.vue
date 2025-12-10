@@ -40,13 +40,13 @@ const updatePlugin = (id: string) => {
   console.log('Update plugin:', id)
 }
 
-// const toggleInstance = (instanceId: string, isOpen: boolean) => {
-//   if (isOpen) {
-//     window.xds.pluginActive(instanceId)
-//   } else {
-//     window.xds.pluginDeactivate(instanceId)
-//   }
-// }
+const toggleInstance = (instanceId: string, isOpen: boolean) => {
+  if (isOpen) {
+    window.xds.pluginActive(instanceId)
+  } else {
+    window.xds.pluginDeactivate(instanceId)
+  }
+}
 </script>
 
 <template>

@@ -8,7 +8,8 @@ import {router} from "@/configs/router";
 import {useSettingStoreWithOut} from "@/configs/pinia";
 import {storeToRefs} from "pinia";
 
-const main = window.xds.getPluginInfo('main')
+const main = window.main.getInfo()
+const name = `${main.name} v${main.version}`
 const logo = '../../assets/images/icon.png'
 const setting = storeToRefs(useSettingStoreWithOut());
 const active = reactive(['setting']);
@@ -21,7 +22,7 @@ const changeMenu = (key: any) => {
 
 <template>
   <div class="main">
-    <Topbar :logo="logo" :title="main.name" />
+    <Topbar :logo="logo" :title="name" />
     <div class="container">
       <div class="menu">
         <a-menu class="a-menu-item"
@@ -31,8 +32,8 @@ const changeMenu = (key: any) => {
                 @select="({key}) => changeMenu(key)"
         >
           <a-menu-item key="setting">{{ $t("settings.setting") }}</a-menu-item>
+          <a-menu-item key="dock">{{ $t("settings.dock") }}</a-menu-item>
           <a-menu-item key="plugin">{{ $t("settings.plugin") }}</a-menu-item>
-          <a-menu-item key="store">{{ $t("settings.store") }}</a-menu-item>
           <a-menu-item key="proxy">{{ $t("settings.proxy") }}</a-menu-item>
           <a-menu-item key="about">{{ $t("settings.about") }}</a-menu-item>
         </a-menu>

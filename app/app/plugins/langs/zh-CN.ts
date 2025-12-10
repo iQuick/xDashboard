@@ -9,8 +9,8 @@ export default {
     },
     settings: {
         setting: "设置",
-        plugin: "插件",
-        store: "插件商店",
+        dock: "桌面",
+        plugin: "应用",
         proxy: "代理",
         about: "关于",
     },
@@ -22,8 +22,8 @@ export default {
             authentication: '认证',
         },
         name: {
-            host: '服务器代理',
-            port: '服务器端口',
+            host: '地址',
+            port: '端口',
             username: '用户名',
             password: '密码',
         },

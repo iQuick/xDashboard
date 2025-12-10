@@ -2,6 +2,7 @@
   "name": "xDashboard",
   "version": "0.0.1",
   "private": true,
+  "website": "https://github.com/iQuick/xDashboard",
   "main": "public/core/index.js",
   "scripts": {
     "dev": "electron-vite dev --watch",

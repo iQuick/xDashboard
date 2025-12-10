@@ -1,57 +1,49 @@
 "use strict";
-const electron = require("electron");
-const _sendSync = (event, data = null) => {
-  const result = electron.ipcRenderer.sendSync("xds-api", {
-    event,
-    data
-  });
-  if (result instanceof Error) {
-    console.log("Error", result);
-  }
-  return result;
-};
-const _send = (event, data = null) => {
-  electron.ipcRenderer.send("xds-api", {
-    event,
-    data
-  });
-};
+const index = require("./chunks/index-D3PXazZq.js");
+require("electron");
 window.main = {
   __event__: {},
   hooks: {},
-  mainMaximize: () => {
-    _send("main:func:maximize");
+  maximize: () => {
+    index.sendEvent("main:maximize");
   },
-  mainMinimize: () => {
-    _send("main:func:minimize");
+  minimize: () => {
+    index.sendEvent("main:minimize");
   },
-  mainClose: () => {
-    _send("main:func:close");
+  show: () => {
+    index.sendEvent("main:show");
   },
-  pluginCreate: (name) => {
-    _send("main:func:plugin-create", {
-      "name": name
-    });
+  close: () => {
+    index.sendEvent("main:close");
   },
-  pluginActive: (id) => {
-    _send("main:func:plugin-active", {
-      id
-    });
+  getInfo: () => {
+    return index.sendEventSync("main:get-info");
   },
-  pluginDeactivate: (id) => {
-    _send("main:func:plugin-deactivate", {
-      id
-    });
-  },
-  getAppInfo: () => {
-    return _sendSync("main:get:app-info");
-  },
-  getPluginInfo: (id) => {
-    return _sendSync("main:get:plugin-info", {
+  getPlugin: (id) => {
+    return index.sendEventSync("main:get-plugin", {
       id
     });
   },
   getPlugins: () => {
-    return _sendSync("main:get:plugins");
+    return index.sendEventSync("main:get-plugins");
+  }
+};
+window.plugin = {
+  __event__: {},
+  hooks: {},
+  install: (id) => {
+    index.sendEvent("plugin:install", {
+      id
+    });
+  },
+  uninstall: (id) => {
+    index.sendEvent("plugin:minimize", {
+      id
+    });
+  },
+  getInfo: (id) => {
+    return index.sendEventSync("plugin:get-info", {
+      id
+    });
   }
 };
