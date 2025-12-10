@@ -1,22 +1,47 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { DeleteOutlined, CodeOutlined, CloudDownloadOutlined, ShopOutlined } from '@ant-design/icons-vue'
+import { DeleteOutlined, CodeOutlined, CloudDownloadOutlined, ShopOutlined, ExclamationCircleOutlined } from '@ant-design/icons-vue'
 import { usePluginStoreWithOut } from '@/plugins/store/plugin'
 import { storeToRefs } from 'pinia'
+import { message } from 'ant-design-vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 const router = useRouter()
 const pluginStore = usePluginStoreWithOut()
 const { plugins } = storeToRefs(pluginStore)
 
+const showUninstallModal = ref(false)
+const currentUninstallId = ref<string>('')
+
 onMounted(() => {
   console.log('Plugins: onMounted')
   pluginStore.fetchPlugins()
   console.log('Plugins:', plugins)
+  
+  // 配置消息提示位置
+  message.config({
+    top: '100px',
+  })
 })
 
 const uninstallPlugin = (id: string) => {
-  pluginStore.uninstallPlugin(id)
+  currentUninstallId.value = id
+  showUninstallModal.value = true
+}
+
+const handleUninstallConfirm = () => {
+  if (currentUninstallId.value) {
+    pluginStore.uninstallPlugin(currentUninstallId.value)
+    showUninstallModal.value = false
+    currentUninstallId.value = ''
+  }
+}
+
+const handleUninstallCancel = () => {
+  showUninstallModal.value = false
+  currentUninstallId.value = ''
 }
 
 const updatePlugin = (id: string) => {
@@ -25,18 +50,15 @@ const updatePlugin = (id: string) => {
 }
 
 const handlePluginDev = () => {
-  // TODO: 打开插件开发相关功能
-  console.log('Plugin Development')
+  message.info(t('functionality_under_development'))
 }
 
 const handleLocalInstall = () => {
-  // TODO: 本地安装插件
-  console.log('Local Install')
+  message.info(t('functionality_under_development'))
 }
 
 const handleStore = () => {
-  // TODO: 打开插件商店
-  console.log('Plugin Store')
+  message.info(t('functionality_under_development'))
 }
 
 const navigateToDetail = (id: string) => {
@@ -49,15 +71,15 @@ const navigateToDetail = (id: string) => {
     <div class="header-actions">
       <a-button size="small" class="action-btn" @click="handleStore">
         <template #icon><shop-outlined /></template>
-        商店
+        {{$t('plugin.store')}}
       </a-button>
       <a-button size="small" class="action-btn" @click="handleLocalInstall">
         <template #icon><cloud-download-outlined /></template>
-        本地安装
+        {{ $t('plugin.local_install') }}
       </a-button>
       <a-button size="small" class="action-btn" @click="handlePluginDev">
         <template #icon><code-outlined /></template>
-        插件开发
+        {{ $t('plugin.development') }}
       </a-button>
     </div>
     
@@ -66,14 +88,6 @@ const navigateToDetail = (id: string) => {
            :key="plugin.id" 
            class="plugin-card"
       >
-        <div v-if="plugin.hasUpdate"
-             class="update-badge"
-             @click.stop="updatePlugin(plugin.id)"
-             :title="`点击更新到 ${plugin.latestVersion}`"
-        >
-          更新 {{ plugin.latestVersion }}
-        </div>
-
         <div class="card-content" @click="navigateToDetail(plugin.id)">
           <div class="plugin-icon">
             <img :src="plugin.logo" class="plugin-logo" />
@@ -103,6 +117,27 @@ const navigateToDetail = (id: string) => {
         </div>
       </div>
     </div>
+
+    <!-- 卸载确认对话框 -->
+    <a-modal
+      v-model:open="showUninstallModal"
+      :title="$t('uninstall_confirm')"
+      :width="240"
+      :closable="false"
+      centered
+      @ok="handleUninstallConfirm"
+      @cancel="handleUninstallCancel"
+    >
+      <template #footer>
+        <a-button @click="handleUninstallCancel">{{ $t('cancel') }}</a-button>
+        <a-button type="primary" danger @click="handleUninstallConfirm">{{$t("uninstall_confirm")}}</a-button>
+      </template>
+      
+      <div class="modal-warning-row">
+        <exclamation-circle-outlined class="warning-icon-small" />
+        <p class="modal-warning">{{ $t("uninstall_warring") }}</p>
+      </div>
+    </a-modal>
   </div>
 </template>
 
@@ -302,6 +337,26 @@ const navigateToDetail = (id: string) => {
         }
       }
     }
+  }
+}
+
+.modal-warning-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 0 12px;
+  
+  .warning-icon-small {
+    font-size: 16px;
+    color: #faad14;
+    flex-shrink: 0;
+  }
+  
+  .modal-warning {
+    margin: 0;
+    color: var(--color-text-desc);
+    font-size: 13px;
   }
 }
 </style>

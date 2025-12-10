@@ -9,6 +9,14 @@ export default {
     update: '更新',
     update_plugin: '更新',
     uninstall_plugin: '卸载应用',
+    uninstall_confirm: '确认卸载',
+    uninstall_warring: '此操作不可恢复!',
+    functionality_under_development: "功能开发中",
+    plugin: {
+        store: '商店',
+        local_install: "本地安装",
+        development: '开发'
+    },
     themes: {
         light: "明亮",
         dark: "黑暗"

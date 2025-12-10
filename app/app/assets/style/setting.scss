@@ -3,31 +3,31 @@
   --color-text-primary: rgba(0, 0, 0, 0.88);
   --color-text-content: #262626;
   --color-text-desc: rgba(0, 0, 0, 0.55);
-  
+
   // 背景色
   --color-body-bg: #ffffff;
   --color-menu-bg: #e1e1e1;
   --color-item-color: rgba(0, 0, 0, 0.1);
-  
+
   // 主题色
   --color-primary: #1677ff;
   --color-primary-hover: #4096ff;
   --color-primary-active: #0958d9;
-  
+
   // 边框和分割线
   --color-border: #d9d9d9;
   --color-border-hover: #4096ff;
   --color-split: rgba(5, 5, 5, 0.06);
-  
+
   // 卡片和容器
   --color-bg-container: #ffffff;
   --color-bg-elevated: #dcdcdc;
-  
+
   // 状态色
   --color-success: #52c41a;
   --color-warning: #faad14;
   --color-error: #ff4d4f;
-  
+
   // 动画
   --transition-all: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
@@ -37,26 +37,26 @@
   --color-text-primary: rgba(255, 255, 255, 0.85);
   --color-text-content: rgba(255, 255, 255, 0.75);
   --color-text-desc: rgba(255, 255, 255, 0.45);
-  
+
   // 背景色
   --color-body-bg: #141414;
   --color-menu-bg: #1f1f1f;
   --color-item-color: rgba(255, 255, 255, 0.08);
-  
+
   // 主题色
   --color-primary: #1668dc;
   --color-primary-hover: #1677ff;
   --color-primary-active: #0958d9;
-  
+
   // 边框和分割线
   --color-border: #424242;
   --color-border-hover: #1677ff;
   --color-split: rgba(253, 253, 253, 0.12);
-  
+
   // 卡片和容器
   --color-bg-container: #1f1f1f;
   --color-bg-elevated: #272727;
-  
+
   // 状态色保持不变，便于识别
   --color-success: #52c41a;
   --color-warning: #faad14;
@@ -77,11 +77,11 @@ a {
   color: var(--color-primary);
   text-decoration: none;
   transition: var(--transition-all);
-  
+
   &:hover {
     color: var(--color-primary-hover);
   }
-  
+
   &:active {
     color: var(--color-primary-active);
   }
@@ -95,11 +95,12 @@ p {
 }
 
 // 列表样式
-ul, ol {
+ul,
+ol {
   color: var(--color-text-content);
   padding-left: 1.5em;
   margin: 1em 0;
-  
+
   li {
     margin: 0.5em 0;
   }
@@ -110,50 +111,54 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin: 1em 0;
-  
-  th, td {
+
+  th,
+  td {
     padding: 0.75em;
     border: 1px solid var(--color-border);
     color: var(--color-text-content);
   }
-  
+
   th {
     background-color: var(--color-menu-bg);
     color: var(--color-text-primary);
     font-weight: 500;
   }
-  
+
   tr:hover {
     background-color: var(--color-item-color);
   }
 }
 
 // 表单元素样式
-input, textarea, select {
+input,
+textarea,
+select {
   color: var(--color-text-content);
   background-color: var(--color-bg-container);
   border: 1px solid var(--color-border);
   padding: 0.5em;
   border-radius: 4px;
   transition: var(--transition-all);
-  
+
   &:hover {
     border-color: var(--color-primary-hover);
   }
-  
+
   &:focus {
     outline: none;
     border-color: var(--color-primary);
     box-shadow: 0 0 0 2px rgba(var(--color-primary), 0.2);
   }
-  
+
   &::placeholder {
     color: var(--color-text-desc);
   }
 }
 
 // 代码块样式
-pre, code {
+pre,
+code {
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
   background-color: var(--color-menu-bg);
   color: var(--color-text-content);
@@ -165,7 +170,7 @@ pre, code {
 pre {
   padding: 1em;
   overflow-x: auto;
-  
+
   code {
     background: none;
     padding: 0;
@@ -179,7 +184,7 @@ blockquote {
   border-left: 4px solid var(--color-primary);
   background-color: var(--color-menu-bg);
   color: var(--color-text-content);
-  
+
   p {
     margin: 0.5em 0;
   }
@@ -212,11 +217,11 @@ hr {
 .ant-notification {
   .ant-notification-notice {
     background: var(--color-bg-elevated);
-    
+
     &-message {
       color: var(--color-text-primary);
     }
-    
+
     &-description {
       color: var(--color-text-content);
     }
@@ -227,14 +232,14 @@ hr {
 .ant-dropdown {
   .ant-dropdown-menu {
     background-color: var(--color-bg-elevated);
-    
+
     &-item {
       color: var(--color-text-content);
-      
+
       &:hover {
         background-color: var(--color-item-color);
       }
-      
+
       &-selected {
         color: var(--color-primary);
         background-color: var(--color-item-color);
@@ -246,19 +251,19 @@ hr {
 // Tabs 标签页
 .ant-tabs {
   color: var(--color-text-content);
-  
+
   &-tab {
     color: var(--color-text-desc);
-    
+
     &:hover {
       color: var(--color-primary-hover);
     }
-    
+
     &-active {
       color: var(--color-primary) !important;
     }
   }
-  
+
   &-ink-bar {
     background: var(--color-primary);
   }
@@ -266,20 +271,21 @@ hr {
 
 // Form 表单
 .ant-form {
-  &-item-label > label {
+  &-item-label>label {
     color: var(--color-text-content);
   }
-  
-  &-item-explain, 
+
+  &-item-explain,
   &-item-extra {
     color: var(--color-text-desc);
   }
-  
+
   &-item-has-error {
+
     .ant-input,
     .ant-input-affix-wrapper {
       border-color: var(--color-error);
-      
+
       &:hover {
         border-color: var(--color-error);
       }
@@ -290,25 +296,25 @@ hr {
 // Pagination 分页
 .ant-pagination {
   color: var(--color-text-content);
-  
+
   &-item {
     background: var(--color-bg-container);
     border-color: var(--color-border);
-    
+
     a {
       color: var(--color-text-content);
     }
-    
+
     &-active {
       border-color: var(--color-primary);
-      
+
       a {
         color: var(--color-primary);
       }
     }
   }
-  
-  &-prev, 
+
+  &-prev,
   &-next {
     button {
       background: var(--color-bg-container);
@@ -321,20 +327,20 @@ hr {
 .ant-card {
   background: var(--color-bg-container);
   border-color: var(--color-border);
-  
+
   &-head {
     border-bottom-color: var(--color-border);
-    
+
     &-title {
       color: var(--color-text-primary);
     }
   }
-  
+
   &-meta {
     &-title {
       color: var(--color-text-primary);
     }
-    
+
     &-description {
       color: var(--color-text-desc);
     }
@@ -345,12 +351,12 @@ hr {
 .ant-tree {
   background: transparent;
   color: var(--color-text-content);
-  
+
   &-node-content-wrapper {
     &:hover {
       background-color: var(--color-item-color);
     }
-    
+
     &.ant-tree-node-selected {
       background-color: var(--color-primary);
       color: #fff;
@@ -364,7 +370,7 @@ hr {
     background-color: var(--color-bg-elevated);
     color: var(--color-text-content);
   }
-  
+
   .ant-tooltip-arrow-content {
     background-color: var(--color-bg-elevated);
   }
@@ -464,19 +470,19 @@ hr {
     border-color: var(--color-primary) !important;
     box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.1) !important;
   }
-  
+
   // 下拉菜单样式
   &-dropdown {
     background-color: var(--color-bg-elevated);
-    
+
     .ant-select-item {
       color: var(--color-text-content);
-      
+
       &-option-selected {
         background-color: var(--color-item-color);
         color: var(--color-primary) !important;
       }
-      
+
       &-option-active {
         background-color: var(--color-item-color);
         color: var(--color-text-content);
@@ -535,7 +541,7 @@ hr {
 
   &-checked .ant-radio-inner {
     border-color: var(--color-primary);
-    
+
     &::after {
       background-color: var(--color-primary);
     }
@@ -547,7 +553,7 @@ hr {
   background: var(--color-bg-container);
   border-color: var(--color-border);
 
-  &-input > input {
+  &-input>input {
     color: var(--color-text-content);
   }
 
@@ -617,16 +623,16 @@ hr {
   // 菜单项
   &-item {
     color: var(--color-text-content) !important;
-    
+
     &:hover {
       background-color: var(--color-item-color) !important;
     }
-    
+
     // 选中状态
     &-selected {
       color: var(--color-primary) !important;
       background-color: var(--color-item-color) !important;
-      
+
       &::after {
         border-right-color: var(--color-primary) !important;
       }
@@ -636,14 +642,14 @@ hr {
   // 暗色主题特殊处理
   &.ant-menu-dark {
     background: var(--color-menu-bg) !important;
-    
+
     .ant-menu-item {
       color: var(--color-text-content) !important;
-      
+
       &:hover {
         background-color: var(--color-item-color) !important;
       }
-      
+
       &-selected {
         color: var(--color-primary) !important;
         background-color: var(--color-item-color) !important;
@@ -652,3 +658,100 @@ hr {
   }
 }
 
+// Modal 对话框
+.ant-modal {
+  .ant-modal-content {
+    background: var(--color-bg-container);
+    color: var(--color-text-content);
+  }
+
+  .ant-modal-header {
+    background: var(--color-bg-container);
+    border-bottom-color: var(--color-border);
+    text-align: center;
+
+    .ant-modal-title {
+      color: var(--color-text-primary);
+    }
+  }
+
+  .ant-modal-body {
+    color: var(--color-text-content);
+  }
+
+  .ant-modal-footer {
+    border-top-color: var(--color-border);
+    text-align: center;
+
+    .ant-btn {
+      color: var(--color-text-content);
+      background: var(--color-bg-container);
+      border-color: var(--color-border);
+      min-width: 80px;
+
+      &:hover {
+        color: var(--color-primary);
+        border-color: var(--color-primary);
+      }
+
+      &:focus {
+        color: var(--color-primary);
+        border-color: var(--color-primary);
+      }
+
+      &-primary {
+        color: #fff !important;
+        background: var(--color-primary);
+        border-color: var(--color-primary);
+
+        &:hover {
+          color: #fff !important;
+          background: var(--color-primary-hover);
+          border-color: var(--color-primary-hover);
+        }
+
+        &:focus {
+          color: #fff !important;
+          background: var(--color-primary);
+          border-color: var(--color-primary);
+        }
+
+        &.ant-btn-dangerous {
+          color: #fff !important;
+          background: var(--color-error);
+          border-color: var(--color-error);
+
+          &:hover {
+            color: #fff !important;
+            background: #ff7875;
+            border-color: #ff7875;
+          }
+
+          &:focus {
+            color: #fff !important;
+            background: var(--color-error);
+            border-color: var(--color-error);
+          }
+        }
+      }
+    }
+  }
+
+  .ant-modal-close {
+    color: var(--color-text-desc);
+
+    &:hover {
+      color: var(--color-text-primary);
+      background: var(--color-item-color);
+    }
+  }
+}
+
+// Modal 遮罩层
+.ant-modal-mask {
+  background-color: rgba(0, 0, 0, 0.45);
+}
+
+.dark .ant-modal-mask {
+  background-color: rgba(0, 0, 0, 0.65);
+}

@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { ArrowLeftOutlined, DeleteOutlined, CloudUploadOutlined } from '@ant-design/icons-vue'
+import { ArrowLeftOutlined, DeleteOutlined, CloudUploadOutlined, ExclamationCircleOutlined } from '@ant-design/icons-vue'
 import { usePluginStoreWithOut } from '@/plugins/store/plugin'
 
 const route = useRoute()
 const router = useRouter()
 const pluginStore = usePluginStoreWithOut()
 
+
 const pluginId = computed(() => route.params.id as string)
 const plugin = computed(() => pluginStore.getPluginById(pluginId.value))
+const showUninstallModal = ref(false)
 
 onMounted(() => {
   pluginStore.fetchPlugins()
@@ -20,13 +22,22 @@ const goBack = () => {
 }
 
 const uninstallPlugin = () => {
+  showUninstallModal.value = true
+}
+
+const handleUninstallConfirm = () => {
   if (plugin.value) {
     pluginStore.uninstallPlugin(plugin.value.id)
+    showUninstallModal.value = false
     // 卸载后返回列表页
     setTimeout(() => {
       goBack()
     }, 500)
   }
+}
+
+const handleUninstallCancel = () => {
+  showUninstallModal.value = false
 }
 
 const updatePlugin = () => {
@@ -109,6 +120,27 @@ const updatePlugin = () => {
         <a-button type="primary" @click="goBack">返回插件列表</a-button>
       </div>
     </div>
+
+    <!-- 卸载确认对话框 -->
+    <a-modal
+      v-model:open="showUninstallModal"
+      :title="$t('uninstall_confirm')"
+      :width="240"
+      :closable="false"
+      centered
+      @ok="handleUninstallConfirm"
+      @cancel="handleUninstallCancel"
+    >
+      <template #footer>
+        <a-button @click="handleUninstallCancel">{{ $t('cancel') }}</a-button>
+        <a-button type="primary" danger @click="handleUninstallConfirm">{{$t("uninstall_confirm")}}</a-button>
+      </template>
+      
+      <div class="modal-warning-row">
+        <exclamation-circle-outlined class="warning-icon-small" />
+        <p class="modal-warning">{{ $t("uninstall_warring") }}</p>
+      </div>
+    </a-modal>
   </div>
 </template>
 
@@ -322,6 +354,53 @@ const updatePlugin = () => {
         font-size: 14px;
       }
     }
+  }
+}
+
+.uninstall-modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 0 8px;
+  text-align: center;
+  
+  .warning-icon {
+    font-size: 48px;
+    color: #faad14;
+  }
+  
+  .modal-message {
+    margin: 0;
+    color: var(--color-text-primary);
+    font-size: 14px;
+    line-height: 1.6;
+    
+    strong {
+      color: var(--color-text-primary);
+      font-weight: 600;
+    }
+  }
+}
+
+.modal-warning-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 0 12px;
+  
+  .warning-icon-small {
+    font-size: 16px;
+    color: #faad14;
+    flex-shrink: 0;
+  }
+  
+  .modal-warning {
+    margin: 0;
+    color: var(--color-text-desc);
+    font-size: 13px;
   }
 }
 </style>
